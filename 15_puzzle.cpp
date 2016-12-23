@@ -7,6 +7,7 @@ int main(int argc, char ** argv) {
     //display the rules
     game.print_rules();
     cout << endl;
+    game.mix();
     game.print_game();
     cout << endl;
     

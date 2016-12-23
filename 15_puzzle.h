@@ -13,7 +13,7 @@ public:
     Puzzle();
     //key is the value of a square tile; value is a position on the board
     //value 0 represents space
-    map<int, int>numbers;
+    map<int, int> numbers;
     //key represents the value of the tile and value represents its direction
     pair<int, int> user_move;
     
@@ -76,6 +76,8 @@ bool Puzzle::user_command() {
     string user_input[2];
     int index = 0;
     char char_taken, prev_char_taken = ' ';
+
+    //string magic_command[1];
     
     user_input[0] = "";
     user_input[1] = "";
@@ -85,6 +87,9 @@ bool Puzzle::user_command() {
     cout << "> ";
     
     while ((char_taken = getchar()) != '\n') {
+        //magic win
+        if (char_taken == '&')
+            initial();
         if (char_taken == ' ' && prev_char_taken != ' ')
             index++;
         else if (index > 2 || (char_taken != ' ' && !isdigit(char_taken)))
@@ -93,6 +98,9 @@ bool Puzzle::user_command() {
             user_input[index] += char_taken;
         prev_char_taken = char_taken;
     }
+
+    // if (user_input[0] == "help" && user_input[1] == "me")
+    //     initial();
     
     if (valid && index >= 1) {
         user_move.first = stoi(user_input[0]);
@@ -194,5 +202,5 @@ void Puzzle::print_rules() {
     << "\t     |" << endl;
     
     cout << "Usage: " << endl;
-    cout << "\t12" << " - " << "2" << " = " << "move 12 down" << endl;
+    cout << "\t12" << " " << "2" << " = " << "move 12 down" << endl;
 }
